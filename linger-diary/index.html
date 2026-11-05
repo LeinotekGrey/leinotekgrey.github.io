@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>徊留 Linger Diary</title>
+<meta name="description" content="在你停下腳步的地方，柴犬會輕輕問你：這裡好像不錯，要留個紀念嗎？所有回憶只存在你的手機裡。">
+<link rel="icon" href="images/icon.png">
+<link rel="apple-touch-icon" href="images/icon.png">
+<meta property="og:title" content="徊留 Linger Diary">
+<meta property="og:description" content="停下來，記住這一刻。所有回憶只存在你的手機裡。">
+<meta property="og:image" content="images/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700&family=Noto+Sans+TC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #F5EFE3;
+    --card: #FBF8F1;
+    --ink: #3B2F25;
+    --ink-soft: #7A6A5B;
+    --accent: #CF8A52;
+    --accent-soft: #F0DCC6;
+    --line: #E4D9C8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #221D18;
+      --card: #2C2620;
+      --ink: #F1E8DA;
+      --ink-soft: #B9AA97;
+      --accent: #E0A06B;
+      --accent-soft: #4A3A2C;
+      --line: #3D352C;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Noto Sans TC", -apple-system, BlinkMacSystemFont, "PingFang TC", sans-serif;
+    line-height: 1.75;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 20px; }
+
+  /* 語言切換 */
+  .lang {
+    display: flex; justify-content: flex-end; gap: 6px;
+    padding-top: 18px;
+  }
+  .lang button {
+    font: inherit; font-size: 14px;
+    background: none; border: 1px solid var(--line);
+    color: var(--ink-soft); border-radius: 999px;
+    padding: 4px 12px; cursor: pointer;
+  }
+  .lang button[aria-pressed="true"] {
+    background: var(--accent); border-color: var(--accent); color: #fff;
+  }
+  [data-l] { display: none; }
+  html[lang="zh-Hant"] [data-l="zh-Hant"],
+  html[lang="en"] [data-l="en"],
+  html[lang="zh-Hans"] [data-l="zh-Hans"] { display: revert; }
+
+  /* 主視覺 */
+  .hero { text-align: center; padding: 48px 0 32px; }
+  .icon {
+    width: 112px; height: 112px; border-radius: 26px;
+    box-shadow: 0 8px 24px rgba(59,47,37,.15);
+  }
+  h1 {
+    font-family: "Noto Serif TC", serif; font-weight: 700;
+    font-size: clamp(36px, 7vw, 52px); letter-spacing: .08em;
+    margin: 20px 0 0;
+  }
+  .en-name { color: var(--ink-soft); letter-spacing: .12em; font-size: 15px; margin: 0; }
+  .tagline {
+    font-family: "Noto Serif TC", serif; font-size: clamp(20px, 4vw, 26px);
+    margin: 22px 0 8px;
+  }
+  .lead { color: var(--ink-soft); max-width: 520px; margin: 0 auto; }
+  .store {
+    display: inline-block; margin-top: 28px;
+    padding: 12px 26px; border-radius: 999px;
+    background: var(--ink); color: var(--paper);
+    text-decoration: none; font-weight: 500;
+  }
+  .store.soon { background: var(--accent-soft); color: var(--ink); }
+  .shiba { width: min(260px, 60vw); margin: 36px auto 0; display: block; }
+
+  /* 特色 */
+  .features {
+    display: grid; gap: 16px; padding: 24px 0 8px;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+  .card {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 20px; padding: 24px;
+  }
+  .card h2 {
+    font-family: "Noto Serif TC", serif; font-size: 20px; margin: 0 0 8px;
+  }
+  .card h2::before {
+    content: ""; display: inline-block; width: 10px; height: 10px;
+    border-radius: 50%; background: var(--accent); margin-right: 10px;
+    vertical-align: middle;
+  }
+  .card p { margin: 0; color: var(--ink-soft); font-size: 15px; }
+
+  /* 截圖 */
+  .shots {
+    display: flex; gap: 14px; overflow-x: auto; padding: 24px 0;
+    scroll-snap-type: x mandatory;
+  }
+  .shots img {
+    height: 420px; border-radius: 22px; scroll-snap-align: center;
+    border: 1px solid var(--line); flex: none;
+  }
+  .shots:empty { display: none; }
+
+  .quote {
+    text-align: center; font-family: "Noto Serif TC", serif;
+    font-size: 19px; padding: 32px 0 40px; color: var(--ink);
+  }
+
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 28px 0 40px; text-align: center;
+    color: var(--ink-soft); font-size: 14px;
+  }
+  footer nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 20px; margin-bottom: 12px; }
+  footer a { color: var(--ink); text-decoration: none; }
+  footer a:hover { color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="lang" role="group" aria-label="Language">
+    <button data-set="zh-Hant">繁中</button>
+    <button data-set="en">EN</button>
+    <button data-set="zh-Hans">简中</button>
+  </div>
+
+  <header class="hero">
+    <img class="icon" src="images/icon.png" alt="徊留 App icon" onerror="this.remove()">
+    <h1>徊留</h1>
+    <p class="en-name">LINGER DIARY</p>
+
+    <p class="tagline">
+      <span data-l="zh-Hant">停下來，記住這一刻</span>
+      <span data-l="en">Pause and keep this moment</span>
+      <span data-l="zh-Hans">停下来，记住这一刻</span>
+    </p>
+    <p class="lead">
+      <span data-l="zh-Hant">在你停下腳步的地方，柴犬會輕輕問你：「這裡好像不錯，要留個紀念嗎？」白天快速記下瞬間，晚上再慢慢回味。</span>
+      <span data-l="en">When you pause somewhere new, a little Shiba gently asks: "This place looks nice. Want to keep a memory?" Capture moments by day, savor them by night.</span>
+      <span data-l="zh-Hans">在你停下脚步的地方，柴犬会轻轻问你：“这里好像不错，要留个纪念吗？”白天快速记下瞬间，晚上再慢慢回味。</span>
+    </p>
+
+    <!-- 上架後：把 href 換成 App Store 網址，並移除 class 裡的 soon -->
+    <a class="store soon" href="#" aria-disabled="true">
+      <span data-l="zh-Hant">即將在 App Store 推出</span>
+      <span data-l="en">Coming soon to the App Store</span>
+      <span data-l="zh-Hans">即将在 App Store 推出</span>
+    </a>
+
+    <img class="shiba" src="images/shiba.png" alt="" onerror="this.remove()">
+  </header>
+
+  <section class="features">
+    <div class="card">
+      <h2>
+        <span data-l="zh-Hant">在當下，兩秒記下</span>
+        <span data-l="en">In the moment</span>
+        <span data-l="zh-Hans">在当下，两秒记下</span>
+      </h2>
+      <p>
+        <span data-l="zh-Hant">停留提醒、拍照、說一句話，或直接在通知上寫一句話。時間和地點自動附上。</span>
+        <span data-l="en">Stay reminders, photos, voice notes, or a line written right from the notification. Time and place are added for you.</span>
+        <span data-l="zh-Hans">停留提醒、拍照、说一句话，或直接在通知上写一句话。时间和地点自动附上。</span>
+      </p>
+    </div>
+    <div class="card">
+      <h2>
+        <span data-l="zh-Hant">晚上，慢慢回味</span>
+        <span data-l="en">In the evening</span>
+        <span data-l="zh-Hans">晚上，慢慢回味</span>
+      </h2>
+      <p>
+        <span data-l="zh-Hant">回憶地圖、每週回顧、去年的今天。為照片、地點或整天寫下日記。</span>
+        <span data-l="en">Memory Map, weekly reviews and On This Day. Write a journal for a photo, a place or the whole day.</span>
+        <span data-l="zh-Hans">回忆地图、每周回顾、去年的今天。为照片、地点或整天写下日记。</span>
+      </p>
+    </div>
+    <div class="card">
+      <h2>
+        <span data-l="zh-Hant">回憶只屬於你</span>
+        <span data-l="en">Yours alone</span>
+        <span data-l="zh-Hans">回忆只属于你</span>
+      </h2>
+      <p>
+        <span data-l="zh-Hant">所有資料只存在你的手機裡。沒有帳號、沒有伺服器，日記鎖保護，隨時免費匯出。</span>
+        <span data-l="en">Everything stays on your iPhone. No account, no servers, Diary Lock, and free export anytime.</span>
+        <span data-l="zh-Hans">所有数据只存在你的手机里。没有账号、没有服务器，日记锁保护，随时免费导出。</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- 截圖：把圖片放進 images/，再把下面的註解拿掉 -->
+  <section class="shots"><!--
+    <img src="images/screen1.png" alt="">
+    <img src="images/screen2.png" alt="">
+    <img src="images/screen3.png" alt="">
+  --></section>
+
+  <p class="quote">
+    <span data-l="zh-Hant">「那一瞬間沒了，就忘了。」</span>
+    <span data-l="en">"Once a moment is gone, it's forgotten."</span>
+    <span data-l="zh-Hans">“那一瞬间没了，就忘了。”</span>
+  </p>
+
+  <footer>
+    <nav>
+      <a href="https://hackmd.io/qhJmQmKuSPuQQsO4HFF_3A">
+        <span data-l="zh-Hant">隱私權政策</span><span data-l="en">Privacy Policy</span><span data-l="zh-Hans">隐私政策</span>
+      </a>
+      <a href="https://hackmd.io/yJhM7_OYRkaKoXcyJli4lw">
+        <span data-l="zh-Hant">使用條款</span><span data-l="en">Terms of Use</span><span data-l="zh-Hans">使用条款</span>
+      </a>
+      <a href="https://hackmd.io/2tLmTqhKS3Kwj6-0GdGPqA">
+        <span data-l="zh-Hant">支援</span><span data-l="en">Support</span><span data-l="zh-Hans">支持</span>
+      </a>
+      <a href="mailto:lingerdiary.support@gmail.com">lingerdiary.support@gmail.com</a>
+    </nav>
+    <div>© 2026 Leinotek Co., Ltd.</div>
+  </footer>
+
+</div>
+<script>
+  (function () {
+    var buttons = document.querySelectorAll('.lang button');
+    function setLang(l) {
+      document.documentElement.lang = l;
+      buttons.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.set === l); });
+      try { localStorage.setItem('lang', l); } catch (e) {}
+    }
+    var saved = null;
+    try { saved = localStorage.getItem('lang'); } catch (e) {}
+    var nav = (navigator.language || '').toLowerCase();
+    var guess = nav.startsWith('zh') ? (/(hans|cn|sg)/.test(nav) ? 'zh-Hans' : 'zh-Hant') : 'en';
+    setLang(saved || guess);
+    buttons.forEach(function (b) { b.addEventListener('click', function () { setLang(b.dataset.set); }); });
+  })();
+</script>
+</body>
+</html>
